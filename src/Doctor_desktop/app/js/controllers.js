@@ -17,8 +17,10 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', '$h
   function($scope, $routeParams, $http) {
     $http.get('data/' + $routeParams.phoneId + '.json').success(function(data) {
       //alert();
-      $scope.phone = data;
-      $scope.mainImageUrl = data.case_photoes[0];
+      $scope.phones = data;
+  
+      $scope.phone = data[0];
+      $scope.mainImageUrl = $scope.phone.case_photoes[0];
     });
 
     $scope.setImage = function(imageUrl) {
@@ -26,16 +28,3 @@ phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', '$h
     }
   }]);
 
-phonecatControllers.controller('inputCaseCtrl', ['$scope', '$http',
-  function($scope, $http) {
-    $http.get('data/patients.json').success(function(data) {
-      $scope.phones = data;
-    });
-  }]);
-
-phonecatControllers.controller('saveCaseCtrl', ['$scope', '$http',
-  function($scope, $http) {
-    $http.get('data/patients.json').success(function(data) {
-      $scope.phones = data;
-    });
-  }]);

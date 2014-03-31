@@ -2,20 +2,29 @@
 
 
 <table><tr><td>
-<li class="phone-thumbs" ng-repeat="img in phone.case_photoes">
+
+<div  ng-repeat="phone_temp in phones" >
+{{phone_temp.interview_date}}
+<li class="phone-thumbs" ng-repeat="img in phone_temp.case_photoes">
   <img ng-src="{{img}}" ng-click="setImage(img)">
-</li>
+</li><hr style="color:red;" />
+
+</div>
+
+
+
 </td><td>
 <span class="phone">
 <img ng-src="{{mainImageUrl}}" width="500" height="700" />
 </span>
 </td><td>
-
 <h1>
   <img ng-src="{{phone.patients_photoes[0]}}" class="phone-thumbs">
   <br/>
   {{phone.patients_id}}   {{phone.name}}  
 </h1>
+
+
 <span>  
   <dl>
     <dt>性别：{{phone.sex}}  &nbsp;&nbsp;年龄：{{phone.age}}</dt>
