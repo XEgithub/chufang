@@ -1,0 +1,51 @@
+
+
+
+<table><tr><td>
+<li class="phone-thumbs" ng-repeat="img in phone.case_photoes">
+  <img ng-src="{{img}}" ng-click="setImage(img)">
+</li>
+</td><td>
+<span class="phone">
+<img ng-src="{{mainImageUrl}}" width="500" height="700" />
+</span>
+</td><td>
+
+<h1>
+  <img ng-src="{{phone.patients_photoes[0]}}" class="phone-thumbs">
+  <br/>
+  {{phone.patients_id}}   {{phone.name}}  
+</h1>
+<span>  
+  <dl>
+    <dt>性别：{{phone.sex}}  &nbsp;&nbsp;年龄：{{phone.age}}</dt>
+    <dt>症状：{{phone.description}}</dt>
+  </dl>
+
+  <dl>
+    <dt>结构：{{phone.jiegou}}</dt>
+    <dt>脉象：{{phone.maixiang}}</dt>
+  </dl>
+
+  <dl>
+    <dt>定病：{{phone.dingbing}}</dt>
+    <dt>定性：{{phone.dingxing}}</dt>
+    <dt>定症：{{phone.dingzheng}}</dt>
+  </dl> 
+
+<span>处方：</span>
+  <dl>
+    <dt ng-repeat="item in phone.recipe">
+      {{item.medicine}}  {{item.count}}  {{item.units}}  {{item.remark}}
+    </dt>
+  </dl>
+
+
+
+</span>
+
+</td></tr></table>
+
+
+
+

@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2_bak">
+      <!--Sidebar content-->
+
+      搜索: <input ng-model="query">
+      
+
+    </div>
+    <div class="span10">
+      <!--Body content-->
+
+      <ul class="phones">
+	    <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail">
+
+
+          <a href="#/phones/{{phone.patients_id}}" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
+          
+          <a href="#/phones/{{phone.patients_id}}">{{phone.name}}</a>
+
+          <div>{{phone.snippet}}</div>
+
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+  排序:<select ng-model="orderProp">
+        <option value="name">名字</option>
+        <option value="age">年龄</option>
+      </select>
+</div>

@@ -1,0 +1,62 @@
+{
+    "additionalFeatures": "Front Facing 1.3MP Camera", 
+    "android": {
+        "os": "Android 2.2", 
+        "ui": "Dell Stage"
+    }, 
+    "availability": [
+        "T-Mobile"
+    ], 
+    "battery": {
+        "standbyTime": "", 
+        "talkTime": "31", 
+        "type": "男"
+    }, 
+    "camera": {
+        "features": [
+            "Flash", 
+            "Video"
+        ], 
+        "primary": "5.0 megapixels"
+    }, 
+    "connectivity": {
+        "bluetooth": "头晕病", 
+        "cell": "头晕", 
+        "gps": true, 
+        "infrared": false, 
+        "wifi": "热性"
+    }, 
+    "description": "药枕疗法 配方1：夏枯草、荷叶、竹叶、公英、菊花各50g，研为细末，装入布袋中，当枕芯用，连续1～2月。配方2：野菊花500g，红花100g，薄荷200g，冬桑叶、辛夷、冰片各50g，共研粗末，装入枕芯，3个月为一疗程。此二方均可清热平肝，适用于肝阳上亢所致的眩晕。", 
+    "display": {
+        "screenResolution": "WVGA (800 x 480)", 
+        "screenSize": "7.0 inches", 
+        "touchScreen": true
+    }, 
+    "hardware": {
+        "accelerometer": true, 
+        "audioJack": "3.5mm", 
+        "cpu": "nVidia Tegra T20", 
+        "fmRadio": false, 
+        "physicalKeyboard": false, 
+        "usb": "USB 2.0"
+    }, 
+    "id": "dell-streak-7", 
+    "images": [
+        "img/photoes/a1.jpeg", 
+        "img/photoes/c1.jpg", 
+        "img/photoes/hand.jpeg"
+    ], 
+    "name": "张三", 
+    "sizeAndWeight": {
+        "dimensions": [
+            "199.9 mm (w)", 
+            "119.8 mm (h)", 
+            "12.4 mm (d)"
+        ], 
+        "weight": "450.0 grams"
+    }, 
+    "storage": {
+        "flash": "平", 
+        "ram": "某某结构"
+    }
+}
