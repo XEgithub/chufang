@@ -44,6 +44,7 @@ CREATE TABLE `t_recipe` (
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8;
 
+
 CREATE TABLE `t_recipe_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `recipe_id` int(11) NOT NULL,
@@ -85,7 +86,7 @@ CREATE TABLE `t_setting` (
 drop PROCEDURE get_history_recipe;
 DELIMITER //
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_history_recipe`(
+CREATE  PROCEDURE `get_history_recipe`(
         IN  p_mobileNo VARCHAR(32))
 BEGIN
     DECLARE return_value VARCHAR(20000);
@@ -93,9 +94,17 @@ BEGIN
     DECLARE err_msg VARCHAR(128);
     DECLARE run_flag INT;
     DECLARE new_id INT;
+    DECLARE s_flag int default 0;  
+    DECLARE str_a VARCHAR(1024);
+    DECLARE str_b VARCHAR(8192);
+    DECLARE str_all VARCHAR(128) DEFAULT '';
     
     
     DECLARE v_patient_id INT;
+
+    DECLARE cursor_AAA CURSOR FOR SELECT json_id FROM t_recipe WHERE patient_id=v_patient_id ORDER BY id DESC;
+    #设置一个终止标记    
+    DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET s_flag=1;  
 
     SET return_value = '';
     SET err_no = 'e000000';
@@ -113,13 +122,29 @@ BEGIN
 
     IF run_flag = 0 AND v_patient_id IS NOT NULL THEN
         SET return_value = '{run_result:"run_start", return_data:{mobile:XXXXXX} }';  
-        SELECT json_id FROM t_recipe WHERE patient_id=v_patient_id ORDER BY id DESC;
+        
+        #打开游标  
+        OPEN cursor_AAA;
+        #获取游标当前指针的记录，读取一行数据并传给变量a,b  
+        fetch  cursor_AAA into str_b;  
+        #开始循环，判断是否游标已经到达了最后作为循环条件   
+        while s_flag <> 1 do  
+             
+            select json_string into str_a from t_json where id=str_b;
+            set str_all =  concat(str_all,str_a); 
+            #读取下一行的数据  
+            fetch  cursor_AAA into str_b;  
+        end while;  
+        #关闭游标  
+        CLOSE cursor_AAA ; 
+
+
     ELSE
         SET return_value = '{run_result:"run_error", return_data:{} }';
         SET run_flag = 2; 
     END IF;
 
-    INSERT INTO t_json_temp (json_string) VALUES(return_value);
+    INSERT INTO t_json_temp (json_string) VALUES(str_all);
     SET new_id=LAST_INSERT_ID();
 
 
@@ -134,39 +159,39 @@ END
 
 
 
-CREATE PROCEDURE plogin
-(
-    p_username char(15),
-    p_password char(32),
-    p_ip char(18),
-    p_logintime datetime
-)
-LABEL_PROC:
+CREATE PROCEDURE plogin()
+
 BEGIN   
+    DECLARE s_flag int default 0;  
+    DECLARE str_b VARCHAR(128);
+    DECLARE str_all VARCHAR(128);
+    declare int_abc int(11) default 0;
+
  
-    DECLARE v_uid mediumint(8);  
-    DECLARE v_realpassword char(32);     
-    DECLARE v_nickname varchar(30);    
-    DECLARE v_oltime smallint(6);      
-   
-    SELECT u.uid, u.password, f.nickname, u.oltime INTO v_uid, v_realpassword, v_nickname, v_oltime
-    FROM cdb_members u INNER JOIN cdb_memberfields f ON f.uid = u.uid WHERE u.username = p_username;   
-   
-    IF (v_uid IS NULL) THEN
-        SELECT 2 AS ErrorCode;
-        LEAVE LABEL_PROC;
-    END IF;
+    DECLARE cursor_AAA CURSOR FOR SELECT json_id FROM t_recipe where id=int_abc;
+    #设置一个终止标记    
+    DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET s_flag=1;  
+    set int_abc = 1;
+    #打开游标  
+    OPEN cursor_AAA;
+    set str_all = 'xxx';
+
+    
+    #获取游标当前指针的记录，读取一行数据并传给变量a,b  
+    fetch  cursor_AAA into str_b;  
+    #开始循环，判断是否游标已经到达了最后作为循环条件   
+    while s_flag <> 1 do  
+        set str_all =  concat(str_all,str_b);  
+        #读取下一行的数据  
+        fetch  cursor_AAA into str_b;  
+    end while;  
+    #关闭游标  
+    CLOSE cursor_AAA ; 
+
+    select str_all;
  
-    IF (p_password <> v_realpassword) THEN
-        SELECT 3 AS ErrorCode;
-        LEAVE LABEL_PROC;
-    END IF;
- 
-    UPDATE ipsp_userexpands SET lastloginip = p_ip, lastlogintime = p_logintime WHERE uid = v_uid;
- 
-    SELECT 0 AS ErrorCode, v_uid AS uid, v_nickname AS nickname, v_oltime AS oltime;
- 
-END LABEL_PROC //
+END 
+ //
 
 
 
