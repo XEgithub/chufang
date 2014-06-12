@@ -26,12 +26,17 @@ update t_patient set patient_id=id where id='1';
 
 select * from t_patient;
 
+INSERT INTO t_patient (`patient_no`, `patient_name`, `sex`, `age`, `mobile`) VALUES ('12345','张三','男','31','13991907195');
+
+INSERT t_json (json_string) VALUES ('{abc:11111}');	
 
 
+INSERT INTO t_patient (`patient_no`, `patient_name`, `sex`, `age`, `mobile`)   VALUES    ('12345','张三','男','31','13991907195')
 
-INSERT t_json (json_string) VALUES ('{abc:11111}');
+INSERT INTO `t_setting` (`KEY`,`VALUE`) values ('test','123');
+INSERT INTO `t_setting` (`KEY`,`VALUE`) values ('test','张三');
 
-
+show processlist; 
 
 
 

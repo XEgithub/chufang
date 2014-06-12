@@ -17,7 +17,8 @@ CREATE TABLE `t_patient` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `patient_no` varchar(32) NOT NULL,
   `patient_name` varchar(64) NOT NULL,
-  `patient_sex` varchar(16)  NULL,
+  `sex` varchar(16)  NULL,
+  `age` varchar(16)  NULL,
   `mobile` varchar(32) NOT NULL,
   `old_mobile` varchar(1024) NULL,
   `comment` varchar(256) DEFAULT NULL,
@@ -32,8 +33,12 @@ CREATE TABLE `t_recipe` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `recipe_no` varchar(32) NOT NULL,
   `patient_id` int(11) NOT NULL,
-  `patient_name` varchar(64)  NULL,
-  `mobile` varchar(32)  NULL,
+  `patient_no` varchar(64) NOT NULL,
+  `patient_name` varchar(64) DEFAULT NULL,
+  `mobile` varchar(32) DEFAULT NULL,
+  `age` varchar(16) DEFAULT NULL,
+  `sex` varchar(16) DEFAULT NULL,
+  `patient_comment` varchar(256) DEFAULT NULL,
   `dingxing` varchar(64) DEFAULT NULL,
   `dingbing` varchar(64) DEFAULT NULL,
   `dingzheng` varchar(64) DEFAULT NULL,
@@ -42,7 +47,12 @@ CREATE TABLE `t_recipe` (
   `json_id` int(11) DEFAULT NULL,
   `update_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8;
+
+ALTER TABLE `t_recipe` ADD COLUMN `age` VARCHAR(16)  NULL AFTER `mobile`;
+ALTER TABLE `t_recipe` ADD COLUMN `sex` VARCHAR(16)  NULL AFTER `age`;
+ALTER TABLE `t_recipe` ADD COLUMN `patient_comment` VARCHAR(256)  NULL AFTER `sex`;
+
 
 
 CREATE TABLE `t_recipe_item` (
@@ -192,18 +202,6 @@ BEGIN
  
 END 
  //
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
