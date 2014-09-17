@@ -1,3 +1,22 @@
+
+    
+ CREATE TABLE `t_customer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `patient_no` varchar(32) NOT NULL,
+  `patient_name` varchar(64) NOT NULL,
+  `mobile` varchar(64) NOT NULL,
+  `sex` varchar(16)  NULL,
+  `age` varchar(16)  NULL,
+  `birthday` datetime NULL,
+  `remark` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8;
+CREATE INDEX i_customer_patient_no on t_customer(patient_no);
+ALTER TABLE `t_customer`
+ADD CONSTRAINT key_patient_no UNIQUE (`patient_no`); 
+
+   
+    
 CREATE TABLE `t_booking` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `booking_date` varchar(32) NOT NULL,
