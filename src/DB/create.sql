@@ -111,6 +111,16 @@ CREATE TABLE `t_setting` (
   PRIMARY KEY (`id`)
 ) ;
 
+CREATE TABLE `t_medicine` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `medicine_name` varchar(32) NOT NULL,
+  `price` varchar(32) NOT NULL,
+  `short_name` varchar(32) NOT NULL,
+  `update_date` timestamp DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8;
+CREATE UNIQUE INDEX i_medicine_name on t_medicine(medicine_name);
+
 
 drop PROCEDURE get_history_recipe;
 DELIMITER //
